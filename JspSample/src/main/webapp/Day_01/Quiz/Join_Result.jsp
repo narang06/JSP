@@ -8,16 +8,19 @@
 </head>
 <body>
 	<%
-	String id = request.getParameter("userId");
-	out.println("아이디 : " + id);
 	String pwd = request.getParameter("pwd");
-	out.println("비밀번호 : " + pwd);
-	String name = request.getParameter("name");
-	out.println("이름 : " + name);
+	String id = request.getParameter("userId");
+	String userName = request.getParameter("userName");
+	String gender = request.getParameter("gender");
 	String hobby[] = request.getParameterValues("hobby");
-	for (int i = 0; i < hobby.length; i++) {
-		out.println("취미 : "+hobby[i]+",");
-	}
 	%>
+	
+	<div>아이디 : <%= id %></div>
+	<div>비밀번호 : <%= pwd %></div>
+	<div>이름 : <%= userName %></div>
+	<div>성별 : <%= gender.equals("M")? "남자" : "여자" %></div>
+	
+	
+
 </body>
 </html>
