@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Board-List</title>
+<title>Stu-List</title>
 <style>
 #container {
 	width: 500px;
@@ -25,7 +25,8 @@ table, tr, td, th {
 </style>
 </head>
 <body>
-	<%@ include file="../DB/DB.jsp"%>
+	<!-- Stu-List.jsp => 학생목록을 테이블 형태로 출력 +(출력컬럼 - 학번,이름,학과,키) + 검색 기능 추가(이름으로 검색) -->
+	<%@ include file="../../DB/DB.jsp"%>
 	<div id="container">
 		<div id="search">
 			검색어 : <input type="text" id="keyword">
@@ -33,52 +34,47 @@ table, tr, td, th {
 		</div>
 		<table>
 			<tr>
-				<th>번호</th>
-				<th>제목</th>
-				<th>작성자</th>
-				<th>조회수</th>
-				<th>작성일</th>
+				<th>학번</th>
+				<th>이름</th>
+				<th>학과</th>
+				<th>키</th>
 			</tr>
 
 			<%
 			ResultSet rs = null;
 			String keyword = request.getParameter("keyword");
-			
+
 			String keywordQuery = "";
-			if(keyword != null){
-				keywordQuery = "WHERE TITLE LIKE '%" + keyword + "%'";
+			if (keyword != null) {
+				keywordQuery = "WHERE STU_NAME LIKE '%" + keyword + "%'";
 			}
-			
-			String query = "SELECT B.*, TO_CHAR(CDATETIME, 'YYYY-MM-DD') AS CTIME FROM TBL_BOARD B " + keywordQuery;
+
+			String query = "SELECT * FROM STUDENT " + keywordQuery;
 			rs = stmt.executeQuery(query);
 
 			while (rs.next()) {
 			%>
 			<tr>
-				<td><%=rs.getString("BOARDNO")%></td>
-				<td>
-					<%-- <a href="Board_View.jsp?boradNo="><%=rs.getString("TITLE")%> --%>
-					<a href="javascript:;"
-					onclick="fnBoard(<%=rs.getString("BOARDNO")%>)"><%=rs.getString("TITLE")%></a>
+				<td><%=rs.getString("STU_NO")%></td>
+				<td><a href="javascript:;"
+					onclick="fnBoard(<%=rs.getString("STU_NO")%>)"><%=rs.getString("STU_NAME")%></a>
 				</td>
-				<td><%=rs.getString("USERID")%></td>
-				<td><%=rs.getString("CNT")%></td>
-				<td><%=rs.getString("CTIME")%></td>
+				<td><%=rs.getString("STU_DEPT")%></td>
+				<td><%=rs.getString("STU_HEIGHT")%></td>
 			</tr>
-
 			<%
 			}
 			%>
-		</table>
+		
 	</div>
 </body>
 </html>
 <script>
-	function fnBoard(boardNo){
-		location.href = "Board_View.jsp?boardNo=" + boardNo;
+	function fnBoard(stuNo){
+		location.href = "Stu-View.jsp?STU_NO=" + stuNo;
 	}
 	function fnSearch(){
 		let keyword = document.querySelector("#keyword").value;
-		location.href ="Board-List.jsp?keyword="+keyword;
+		location.href ="Stu-List.jsp?keyword="+keyword;
 	}
 </script>
