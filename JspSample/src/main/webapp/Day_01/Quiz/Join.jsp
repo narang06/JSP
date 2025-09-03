@@ -54,14 +54,15 @@
 			<input type="checkbox" name="hobby" value="등산">등산
 		</div>
 		<div>
-			<input type="submit" value="가입" onclick="return fnJoin()">
+			<input type="button" value="가입" onclick="return fnJoin()">
 		</div>
 	</form>
 </body>
 </html>
 <script>
-	let join = document.join;
+	
 	function fnJoin() {
+		let join = document.join;
 		if(join.userId.value.length < 6) {
 			alert("아이디는 6글자 이상이여야 합니다.")
 			join.userId.focus();
