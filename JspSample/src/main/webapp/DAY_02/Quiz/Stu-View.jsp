@@ -55,7 +55,8 @@ table, tr, td, th {
 				</tr>
 			</table>
 			<div>
-				<input type="submit" value="삭제" onclick="fnRemove()">
+				<input type="button" value="삭제" onclick="fnRemove()">
+				<input type="button" value="수정" onclick="fnEdit()">
 			</div>
 		</form>
 		<%
@@ -67,6 +68,14 @@ table, tr, td, th {
 </body>
 </html>
 <script>
+	function fnEdit() {
+		let student = document.student;
+		let stuNo = student.stuNo.value;
+		location.href = "Stu-Edit.jsp?stuNo=" + stuNo;
+	}
+	
+	
+	
 	function fnRemove() {
 		let stuForm = document.student;
 		if (!confirm("정말 삭제하시겠습니까?")) {

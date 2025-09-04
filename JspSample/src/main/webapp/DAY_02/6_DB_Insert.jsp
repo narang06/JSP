@@ -29,7 +29,7 @@
 	function fnAdd() {
 		let stu = document.stu;
 		if(joinFlg) {
-			stu.submit;
+			stu.submit();
 		} else {
 			alert("중복체크 통과후에 추가해주세요.");
 		}
@@ -42,10 +42,10 @@
 				"width=300, height=300");
 	}
 	function fnReturn(flg) {
-		if (flg.equlas("N")) {
+		if (flg == "N") {
 			let form = document.stu;
-
-			form.stuNo.disabled = true;
+			form.StuNo.disabled = true;
+			joinflg = true;
 		}
 
 	}

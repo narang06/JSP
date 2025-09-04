@@ -22,6 +22,10 @@ table, tr, td, th {
 #search {
 	margin-bottom: 10px;
 }
+
+.button {
+	margin-top: 5px;
+}
 </style>
 </head>
 <body>
@@ -65,7 +69,10 @@ table, tr, td, th {
 			<%
 			}
 			%>
-		
+		</table>
+		<div class="button">
+			<a href="Stu-Add.jsp"> <input type="button" value="학생 추가"></a>
+		</div>
 	</div>
 </body>
 </html>
