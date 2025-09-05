@@ -55,8 +55,7 @@ a {
 
 	<div id="container">
 		<div id="search">
-			<!-- 원래 상태 유지 -->
-			검색어 : <input type="text" id="keyword">
+			검색어 : <input type="text" id="keyword" value="<%= keyword != null ? keyword : "" %>" >
 			<button onclick="fnSearch()">검색</button>
 		</div>
 		<div id="search">
@@ -143,7 +142,7 @@ a {
 				keywordQuery = " WHERE TITLE LIKE '%" + keyword + "%'";
 			}
 
-			// Oracle 12c OFFSET/FETCH 사용 (변경됨)
+			
 			String query = "SELECT B.*, TO_CHAR(CDATETIME, 'YYYY-MM-DD') AS CTIME "
 					+ "FROM TBL_BOARD B " + keywordQuery 
 					+ orderQuery
@@ -173,7 +172,7 @@ a {
 				if(i == currentPage) {
 					out.println("<a href='?page=" + i + "&size=" + pageSize + "' class='active'>" + i + "</a>");
 				} else {
-					out.println("<a href='?page=" + i + "&size=" + pageSize + "'>" + i + "</a>");
+					out.println("<a href='?page=" + i + "&size=" + pageSize + "&keyword=" + keyword + "'>" + i + "</a>");
 				}
 			}
 			%>
@@ -183,9 +182,17 @@ a {
 			</a>
 		</div>
 	</div>
+	<input id="pageSize" value="<%= pageSize %>" hidden>
 </body>
 </html>
 <script>
+	let size = document.querySelector("#pageSize").value;
+	let selectList = document.querySelector("#number");
+	for(let i=0; i <selectList.length; i++){
+		if(selectList[i].value == size) {
+			selectList[i].selected = true;
+		}
+	}
 	function fnList(column ,orderKind){
 		location.href="?column="+ column + "&orderKind=" +orderKind;
 	}
@@ -195,7 +202,7 @@ a {
 	}
 	function fnSearch(){
 		let keyword = document.querySelector("#keyword").value;
-		location.href ="Board-List.jsp?keyword="+keyword;
+		location.href ="Board-List.jsp?keyword="+ keyword;
 	}
 	function fnNumber(){
 		 let size = document.querySelector("#number").value;

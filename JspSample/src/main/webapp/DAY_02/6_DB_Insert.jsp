@@ -10,7 +10,7 @@
 	<form action="7_Insert_Result.jsp" name="stu">
 		<div>
 			학번: <input name="StuNo">
-			<button onclick="fnCheck(); return false">중복체크</button>
+			<button onclick="fnCheck(); return false;">중복체크</button>
 		</div>
 		<div>
 			이름: <input name="StuName">
@@ -26,6 +26,8 @@
 </html>
 <script>
 	let joinFlg = false;
+	let stuNo = "";
+	
 	function fnAdd() {
 		let stu = document.stu;
 		if(joinFlg) {
